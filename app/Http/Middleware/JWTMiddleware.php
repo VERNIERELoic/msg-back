@@ -7,9 +7,9 @@ use Exception;
 use Illuminate\Http\Request;
 use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
-use PHPOpenSourceSaver\JWTAuth\JWTAuth as JWTAuthJWTAuth;
+use PHPOpenSourceSaver\JWTAuth\Http\Middleware\BaseMiddleware;
 
-class JWTMiddleware
+class JWTMiddleware extends BaseMiddleware
 {
     /**
      * Handle an incoming request.
@@ -20,10 +20,14 @@ class JWTMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (JWTAuth::Parser()->setRequest($request)->hasToken()) {
+
+        if ($this->auth->Parser()->setRequest($request)->hasToken()) {
             try {
                 $this->auth->parseToken()->authenticate();
+                return $next($request);
             } catch (Exception $e) {
+                throw $e;
+                return response()->json(['error' => $e->getMessage()], 401);
             }
         }
 

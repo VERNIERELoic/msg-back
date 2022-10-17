@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use PHPOpenSourceSaver\JWTAuth\Contracts\Providers\Auth as ProvidersAuth;
+use PHPOpenSourceSaver\JWTAuth\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -77,11 +79,16 @@ class AuthController extends Controller
         ]);
     }
 
+    // public function current()
+    // {
+    //     return response()->json(auth()->user());
+    // }
+
     public function current()
     {
         return response()->json([
             'status' => 'success',
-            'user' => Auth::user(),
+            'user' => Auth()->user(),
         ]);
     }
 
