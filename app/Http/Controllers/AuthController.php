@@ -6,15 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use PHPOpenSourceSaver\JWTAuth\Contracts\Providers\Auth as ProvidersAuth;
-use PHPOpenSourceSaver\JWTAuth\JWTAuth;
 
 class AuthController extends Controller
 {
 
     public function __construct()
     {
-        // $this->middleware('jwt.verify', ['except' => ['login', 'register']]);
     }
 
     public function login(Request $request)
@@ -70,19 +67,12 @@ class AuthController extends Controller
         ]);
     }
 
+
+
     public function logout()
     {
-        Auth::logout();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Successfully logged out',
-        ]);
+        return Auth::logout();
     }
-
-    // public function current()
-    // {
-    //     return response()->json(auth()->user());
-    // }
 
     public function current()
     {
@@ -94,13 +84,6 @@ class AuthController extends Controller
 
     public function refresh()
     {
-        return response()->json([
-            'status' => 'success',
-            'user' => Auth::user(),
-            'authorisation' => [
-                'token' => Auth::refresh(),
-                'type' => 'bearer',
-            ]
-        ]);
+        return Auth::refresh();
     }
 }

@@ -13,6 +13,5 @@ class Planning extends Model
         'user_id',
         'coiffeur_id',
         'date',
-        
     ];
 }

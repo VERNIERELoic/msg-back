@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PlanningController;
+use App\Http\Controllers\UserController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
@@ -16,11 +17,20 @@ Route::controller(AuthController::class)->group(function () {
     });
 });
 
-
 Route::controller(PlanningController::class)->group(function () {
     Route::group(['middleware' => 'jwt.verify'], function () {
-        Route::post('addbooking', 'add_booking');
-        Route::post('deletebooke', 'delete_booking');
-        Route::get('getbooking', 'get_booking');
+        Route::get('timetable', 'getTimeTable');
+        Route::post('registerschedule', 'registerSchedule');
+        Route::post('addbooking', 'addBooking');
+        Route::post('addunavailability', 'addUnavailability');
+        Route::post('removeunavailability', 'removeUnavailability');
+    });
+});
+
+Route::controller(UserController::class)->group(function () {
+    Route::group(['middleware' => 'jwt.verify'], function () {
+        Route::get('getallusers', 'getAllUsers');
+        Route::post('getuser', 'getUser');
+        Route::post('dropuser', 'dropUser');
     });
 });

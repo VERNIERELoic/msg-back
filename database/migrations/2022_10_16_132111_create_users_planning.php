@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users_planning', function (Blueprint $table) {
+        Schema::create('planning', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('coiffeur_id');
+            $table->integer('coiffeur_id')->nullable();
             $table->date('date');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_planning');
+        Schema::dropIfExists('planning');
     }
 };
