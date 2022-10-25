@@ -30,7 +30,9 @@ Route::controller(PlanningController::class)->group(function () {
 Route::controller(UserController::class)->group(function () {
     Route::group(['middleware' => 'jwt.verify'], function () {
         Route::get('getallusers', 'getAllUsers');
-        Route::post('getuser', 'getUser');
-        Route::post('dropuser', 'dropUser');
+        Route::get('getuser/{id}', 'getUser');
+        Route::delete('removeuser/{id}', 'removeUser');
+        Route::put('addadmin', 'addAdmin');
+        Route::put('removeadmin', 'removeAdmin');
     });
 });

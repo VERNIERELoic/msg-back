@@ -12,14 +12,14 @@ class UserController extends Controller
         return User::all();
     }
 
-    public function getUser(Request $request)
+    public function getUser($id)
     {
-        return User::where('username', $request->username);
+        return User::where('id', $id)->first();
     }
 
-    public function removeUser(Request $request)
+    public function removeUser($id)
     {
-        User::where('email', $request->email)->delete();
+        User::where('id', $id)->delete();
     }
 
     public function addAdmin(Request $request)
