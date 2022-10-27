@@ -20,6 +20,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(PlanningController::class)->group(function () {
     Route::group(['middleware' => 'jwt.verify'], function () {
         Route::get('timetable', 'getTimeTable');
+        Route::get('getschedulesat', 'getSchedulesAt');
         Route::post('registerschedule', 'registerSchedule');
         Route::post('addbooking', 'addBooking');
         Route::post('addunavailability', 'addUnavailability');
@@ -31,6 +32,7 @@ Route::controller(UserController::class)->group(function () {
     Route::group(['middleware' => 'jwt.verify'], function () {
         Route::get('getallusers', 'getAllUsers');
         Route::get('getuser/{id}', 'getUser');
+        Route::post('updateuser', 'updateUser');
         Route::delete('removeuser/{id}', 'removeUser');
         Route::put('addadmin', 'addAdmin');
         Route::put('removeadmin', 'removeAdmin');

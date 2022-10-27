@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->integer('owner')->nullable();
-            $table->integer('admin')->nullable();
+            $table->boolean('owner')->default(false);
+            $table->boolean('admin')->default(false);
+            $table->string('image')->default('user.png');
         });
     }
 

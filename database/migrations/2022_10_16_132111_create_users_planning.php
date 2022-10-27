@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('coiffeur_id')->nullable();
             $table->date('date');
+            $table->timestamp('scheduled_at');
             $table->timestamps();
         });
     }
